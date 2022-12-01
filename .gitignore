@@ -1,1 +1,18 @@
-/target
+# `cargo` compiled files and executables
+debug/
+target/
+
+# `cargo` lockfile: remove for `bin`, keep for `lib`
+# https://doc.rust-lang.org/cargo/guide/cargo-toml-vs-cargo-lock.html
+# Cargo.lock
+
+# `rustfmt` generated backup files
+**/*.rs.bk
+
+# `rustc` debugging information for MSVC Windows builds
+*.pdb
+
+# `inputs` are not licensed for redistribution
+# https://www.reddit.com/r/adventofcode/wiki/faqs/copyright/inputs/
+inputs/
+!inputs/.gitkeep
