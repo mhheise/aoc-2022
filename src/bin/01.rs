@@ -30,8 +30,8 @@ fn day01_part2(input: &str) -> usize {
 fn main() -> Result<()> {
     let input = include_str!("../../inputs/01.txt");
 
-    let p1 = day01_part1(&input);
-    let p2 = day01_part2(&input);
+    let p1 = day01_part1(input);
+    let p2 = day01_part2(input);
 
     println!("day01 -> part1: {p1} part2: {p2}");
 
@@ -63,11 +63,11 @@ mod tests {
 
     #[test]
     fn test_part1() {
-        assert_eq!(day01_part1(&SAMPLE), 24000);
+        assert_eq!(day01_part1(SAMPLE), 24000);
     }
 
     #[test]
     fn test_part2() {
-        assert_eq!(day01_part2(&SAMPLE), 45000);
+        assert_eq!(day01_part2(SAMPLE), 45000);
     }
 }
