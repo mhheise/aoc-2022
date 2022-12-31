@@ -8,8 +8,7 @@ default-run = "aoc"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-anyhow = "1"
-indoc = "1"
+color-eyre = "0.6"
 itertools = "0.10"
 
 [dev-dependencies]

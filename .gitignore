@@ -14,5 +14,5 @@ target/
 
 # `inputs` are not licensed for redistribution
 # https://www.reddit.com/r/adventofcode/wiki/faqs/copyright/inputs/
-inputs/
-!inputs/.gitkeep
+src/inputs/
+!src/inputs/.gitkeep

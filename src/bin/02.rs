@@ -1,6 +1,10 @@
-use anyhow::Result;
+#![allow(unused_variables)]
+use aoc::solve;
+use color_eyre::Result;
 
-fn day02_part1(input: &str) -> usize {
+const DAY: u8 = 2;
+
+fn p1(input: &str) -> Option<usize> {
     // X, Y, Z -> 1, 2, 3
     // win, draw, loss -> 6, 3, 0
     let calc = |round: Vec<&str>| match round[..] {
@@ -16,14 +20,16 @@ fn day02_part1(input: &str) -> usize {
         _ => unreachable!(),
     };
 
-    input
-        .lines()
-        .map(|game| game.split(' ').collect::<Vec<&str>>())
-        .map(calc)
-        .sum()
+    Some(
+        input
+            .lines()
+            .map(|game| game.split(' ').collect::<Vec<&str>>())
+            .map(calc)
+            .sum(),
+    )
 }
 
-fn day02_part2(input: &str) -> usize {
+pub fn p2(input: &str) -> Option<usize> {
     // X, Y, Z now means lose, draw, win
     let calc = |round: Vec<&str>| match round[..] {
         ["A", "X"] => 3,     // scissors
@@ -38,43 +44,32 @@ fn day02_part2(input: &str) -> usize {
         _ => unreachable!(),
     };
 
-    input
-        .lines()
-        .map(|game| game.split(' ').collect::<Vec<&str>>())
-        .map(calc)
-        .sum()
+    Some(
+        input
+            .lines()
+            .map(|game| game.split(' ').collect::<Vec<&str>>())
+            .map(calc)
+            .sum(),
+    )
 }
 
 fn main() -> Result<()> {
-    let input = include_str!("../../inputs/02.txt");
-
-    let p1 = day02_part1(input);
-    let p2 = day02_part2(input);
-
-    println!("day02 -> part1: {p1} part2: {p2}");
-
-    Ok(())
+    color_eyre::install()?;
+    Ok(solve!(&aoc::read_file("inputs", DAY)?, p1, p2))
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-    use indoc::indoc;
     use pretty_assertions::assert_eq;
 
-    const SAMPLE: &str = indoc! {r#"
-        A Y
-        B X
-        C Z
-    "#};
-
     #[test]
-    fn test_part1() {
-        assert_eq!(day02_part1(SAMPLE), 15);
+    fn test_p1() {
+        assert_eq!(p1(&aoc::read_file("examples", DAY).unwrap()), Some(15));
     }
 
     #[test]
-    fn test_part2() {
-        assert_eq!(day02_part2(SAMPLE), 12);
+    fn test_p2() {
+        assert_eq!(p2(&aoc::read_file("examples", DAY).unwrap()), Some(12));
     }
 }

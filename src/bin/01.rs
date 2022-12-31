@@ -1,73 +1,48 @@
-use anyhow::Result;
+#![allow(unused_variables)]
+use aoc::solve;
+use color_eyre::Result;
 use itertools::Itertools;
 
-fn day01_part1(input: &str) -> usize {
-    input
-        .split("\n\n")
-        .map(|elf| {
-            elf.lines()
-                .map(|cal| cal.parse::<usize>().unwrap())
-                .sum::<usize>()
-        })
-        .max()
-        .unwrap()
-}
+const DAY: u8 = 1;
 
-fn day01_part2(input: &str) -> usize {
+fn parse(input: &str) -> Vec<usize> {
     input
         .split("\n\n")
         .map(|elf| {
             elf.lines()
-                .map(|cal| cal.parse::<usize>().unwrap())
+                .filter_map(|cal| cal.parse::<usize>().ok())
                 .sum::<usize>()
         })
         .sorted()
         .rev()
-        .take(3)
-        .sum::<usize>()
+        .collect::<Vec<usize>>()
+}
+
+fn p1(input: &str) -> Option<usize> {
+    Some(parse(input)[0])
+}
+
+fn p2(input: &str) -> Option<usize> {
+    Some(parse(input)[0..3].iter().sum())
 }
 
 fn main() -> Result<()> {
-    let input = include_str!("../../inputs/01.txt");
-
-    let p1 = day01_part1(input);
-    let p2 = day01_part2(input);
-
-    println!("day01 -> part1: {p1} part2: {p2}");
-
-    Ok(())
+    color_eyre::install()?;
+    Ok(solve!(&aoc::read_file("inputs", DAY)?, p1, p2))
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-    use indoc::indoc;
     use pretty_assertions::assert_eq;
 
-    const SAMPLE: &str = indoc! {r#"
-        1000
-        2000
-        3000
-
-        4000
-
-        5000
-        6000
-
-        7000
-        8000
-        9000
-
-        10000
-    "#};
-
     #[test]
-    fn test_part1() {
-        assert_eq!(day01_part1(SAMPLE), 24000);
+    fn test_p1() {
+        assert_eq!(p1(&aoc::read_file("examples", DAY).unwrap()), Some(24000))
     }
 
     #[test]
-    fn test_part2() {
-        assert_eq!(day01_part2(SAMPLE), 45000);
+    fn test_p2() {
+        assert_eq!(p2(&aoc::read_file("examples", DAY).unwrap()), Some(45000))
     }
 }
