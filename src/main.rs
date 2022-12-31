@@ -8,6 +8,7 @@ fn main() -> Result<()> {
 
     let days = fs::read_dir(concat!(env!("CARGO_MANIFEST_DIR"), "/src/bin/"))?
         .filter_map(|p| p.ok()?.path().file_stem()?.to_str().map(str::to_string))
+        .filter(|f| f.parse::<u8>().is_ok())
         .sorted()
         .collect::<Vec<_>>();
 
