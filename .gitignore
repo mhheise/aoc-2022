@@ -16,3 +16,7 @@ target/
 # https://www.reddit.com/r/adventofcode/wiki/faqs/copyright/inputs/
 src/inputs/
 !src/inputs/.gitkeep
+
+# Mac OS
+.DS_Store
+.hushlogin
