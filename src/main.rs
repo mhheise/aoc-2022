@@ -1,7 +1,34 @@
+use std::{fs, process::Command};
+
 use aoc::extract_solver_time;
 use color_eyre::Result;
 use itertools::Itertools;
-use std::{fs, process::Command};
+use tabled::{
+    settings::{
+        object::{Columns, Rows},
+        Alignment, Modify, Style,
+    },
+    Table, Tabled,
+};
+
+#[derive(Tabled)]
+struct Problem {
+    day: String,
+    p1: String,
+    p2: String,
+    time: String,
+}
+
+impl Problem {
+    fn new(day: &str, p1: &str, p2: &str, time: &str) -> Self {
+        Self {
+            day: day.trim_start_matches('0').to_string(),
+            p1: p1.to_string(),
+            p2: p2.to_string(),
+            time: time.to_string(),
+        }
+    }
+}
 
 fn main() -> Result<()> {
     color_eyre::install()?;
@@ -13,6 +40,7 @@ fn main() -> Result<()> {
         .collect::<Vec<_>>();
 
     let mut total_time = 0;
+    let mut solutions: Vec<Problem> = Vec::new();
 
     for day in &days {
         let cmd = Command::new("cargo")
@@ -20,13 +48,20 @@ fn main() -> Result<()> {
             .output()?;
 
         let output = String::from_utf8(cmd.stdout)?;
+        let (p1, p2, time) = output.split_whitespace().collect_tuple().unwrap();
 
-        println!("Day {}:\n{}", day.trim_start_matches('0'), output);
-
+        solutions.push(Problem::new(day, p1, p2, time));
         total_time += extract_solver_time(&output)?;
     }
 
-    println!("Total time: {:.2}ms", total_time / 1000);
+    let mut table = Table::new(solutions);
+    table
+        .with(Style::modern())
+        .with(Modify::new(Rows::first()).with(Alignment::center()))
+        .with(Modify::new(Columns::first()).with(Alignment::center()));
+
+    println!("{}", table);
+    println!("\nTotal time: {:.2}ms", total_time / 1000);
 
     Ok(())
 }
