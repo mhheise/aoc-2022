@@ -1,29 +1,25 @@
-#![allow(unused_variables)]
+#![allow(dead_code, unused_variables)]
 use aoc::solve;
 use color_eyre::Result;
 use itertools::Itertools;
 
 const DAY: u8 = 1;
 
-fn parse(input: &str) -> Vec<usize> {
+fn parse(input: &str) -> Vec<u32> {
     input
         .split("\n\n")
-        .map(|elf| {
-            elf.lines()
-                .filter_map(|cal| cal.parse::<usize>().ok())
-                .sum::<usize>()
-        })
+        .map(|elf| elf.lines().filter_map(|cal| cal.parse::<u32>().ok()).sum())
         .sorted()
         .rev()
-        .collect::<Vec<usize>>()
+        .collect()
 }
 
-fn p1(input: &str) -> Option<usize> {
+fn p1(input: &str) -> Option<u32> {
     Some(parse(input)[0])
 }
 
-fn p2(input: &str) -> Option<usize> {
-    Some(parse(input)[0..3].iter().sum())
+fn p2(input: &str) -> Option<u32> {
+    Some(parse(input).iter().take(3).sum())
 }
 
 fn main() -> Result<()> {
