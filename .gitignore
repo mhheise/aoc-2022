@@ -14,8 +14,9 @@ target/
 
 # `inputs` are not licensed for redistribution
 # https://www.reddit.com/r/adventofcode/wiki/faqs/copyright/inputs/
-src/inputs/
+src/inputs/*
 !src/inputs/.gitkeep
+!src/inputs/00.txt
 
 # Mac OS
 .DS_Store

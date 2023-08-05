@@ -1,22 +1,15 @@
-#![allow(unused_variables)]
+#![allow(dead_code, unused_variables)]
 use aoc::solve;
 use color_eyre::Result;
 
 const DAY: u8 = 0;
 
-fn parse(input: &str) -> Vec<usize> {
-    input
-        .lines()
-        .filter_map(|x| x.parse::<usize>().ok())
-        .collect()
+fn p1(input: &str) -> Option<u32> {
+    None
 }
 
-fn p1(input: &str) -> Option<usize> {
-    Some(parse(input)[0])
-}
-
-fn p2(input: &str) -> Option<usize> {
-    Some(parse(input)[0])
+fn p2(input: &str) -> Option<u32> {
+    None
 }
 
 fn main() -> Result<()> {
@@ -31,11 +24,11 @@ mod tests {
 
     #[test]
     fn test_p1() {
-        assert_eq!(p1(&aoc::read_file("examples", DAY).unwrap()), Some(0))
+        assert_eq!(p1(&aoc::read_file("examples", DAY).unwrap()), None)
     }
 
     #[test]
     fn test_p2() {
-        assert_eq!(p2(&aoc::read_file("examples", DAY).unwrap()), Some(0))
+        assert_eq!(p2(&aoc::read_file("examples", DAY).unwrap()), None)
     }
 }
