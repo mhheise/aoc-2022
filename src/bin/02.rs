@@ -1,55 +1,43 @@
-#![allow(unused_variables)]
+#![allow(dead_code, unused_variables)]
 use aoc::solve;
 use color_eyre::Result;
 
 const DAY: u8 = 2;
 
-fn p1(input: &str) -> Option<usize> {
-    // X, Y, Z -> 1, 2, 3
-    // win, draw, loss -> 6, 3, 0
-    let calc = |round: Vec<&str>| match round[..] {
-        ["A", "X"] => 1 + 3,
-        ["A", "Y"] => 2 + 6,
-        ["A", "Z"] => 3,
-        ["B", "X"] => 1,
-        ["B", "Y"] => 2 + 3,
-        ["B", "Z"] => 3 + 6,
-        ["C", "X"] => 1 + 6,
-        ["C", "Y"] => 2,
-        ["C", "Z"] => 3 + 3,
-        _ => unreachable!(),
-    };
+fn parse(input: &str) -> Vec<(i32, i32)> {
+    input
+        .lines()
+        .map(|line| line.as_bytes())
+        // convert from u8 to i32 to support wrap-around arithmetic
+        .map(|c| ((c[0] - b'A') as i32, (c[2] - b'X') as i32))
+        .collect()
+}
 
+fn p1(input: &str) -> Option<i32> {
     Some(
-        input
-            .lines()
-            .map(|game| game.split(' ').collect::<Vec<&str>>())
-            .map(calc)
-            .sum(),
+        parse(input)
+            .iter()
+            // outcome = ours - theirs + 1 (modulo 3)
+            .map(|(theirs, ours)| {
+                let outcome = (ours - theirs + 1).rem_euclid(3);
+                let shape = ours + 1;
+                3 * outcome + shape
+            })
+            .sum::<i32>(),
     )
 }
 
-pub fn p2(input: &str) -> Option<usize> {
-    // X, Y, Z now means lose, draw, win
-    let calc = |round: Vec<&str>| match round[..] {
-        ["A", "X"] => 3,     // scissors
-        ["A", "Y"] => 1 + 3, // rock
-        ["A", "Z"] => 2 + 6, // paper
-        ["B", "X"] => 1,     // rock
-        ["B", "Y"] => 2 + 3, // paper
-        ["B", "Z"] => 3 + 6, // scissors
-        ["C", "X"] => 2,     // paper
-        ["C", "Y"] => 3 + 3, // scissors
-        ["C", "Z"] => 1 + 6, // rock
-        _ => unreachable!(),
-    };
-
+fn p2(input: &str) -> Option<i32> {
     Some(
-        input
-            .lines()
-            .map(|game| game.split(' ').collect::<Vec<&str>>())
-            .map(calc)
-            .sum(),
+        parse(input)
+            .iter()
+            // ours = theirs + outcome - 1 (modulo 3)
+            .map(|(theirs, outcome)| {
+                let ours = (theirs + outcome - 1).rem_euclid(3);
+                let shape = ours + 1;
+                3 * outcome + shape
+            })
+            .sum::<i32>(),
     )
 }
 
