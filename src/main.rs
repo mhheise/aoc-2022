@@ -43,9 +43,7 @@ fn main() -> Result<()> {
     let mut solutions: Vec<Problem> = Vec::new();
 
     for day in &days {
-        let cmd = Command::new("cargo")
-            .args(["run", "--release", "--bin", day])
-            .output()?;
+        let cmd = Command::new("cargo").args(["run", "--release", "--bin", day]).output()?;
 
         let output = String::from_utf8(cmd.stdout)?;
         let (p1, p2, time) = output.split_whitespace().collect_tuple().unwrap();

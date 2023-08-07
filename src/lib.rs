@@ -1,6 +1,6 @@
-use color_eyre::Result;
-
 use std::{env, fs};
+
+use color_eyre::Result;
 
 /// Read the input file for a given day.
 pub fn read_file(folder: &str, day: u8) -> Result<String> {
@@ -47,8 +47,10 @@ pub fn extract_solver_time(output: &str) -> Result<u32> {
 #[macro_export]
 macro_rules! solve {
     ($input:expr, $p1:ident, $p2:ident) => {{
-        use std::fmt::{Debug, Display};
-        use std::time::{Duration, Instant};
+        use std::{
+            fmt::{Debug, Display},
+            time::{Duration, Instant},
+        };
 
         fn format_solver_time(elapsed: Duration) -> String {
             if elapsed.as_millis() > 0 {
