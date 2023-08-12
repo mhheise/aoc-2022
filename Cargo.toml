@@ -14,3 +14,4 @@ tabled = "0.13"
 
 [dev-dependencies]
 pretty_assertions = "1"
+test-case = "3"
