@@ -1,8 +1,4 @@
-#![allow(dead_code, unused_variables)]
-use std::{collections::HashMap, path::PathBuf};
-
-use aoc::solve;
-use color_eyre::Result;
+use aoc::prelude::*;
 
 const DAY: u8 = 7;
 
@@ -24,7 +20,7 @@ fn parse(input: &str) -> HashMap<PathBuf, u32> {
             ["$", "cd", path] => {
                 candidates.push(path.into());
             }
-            [size, name] => {
+            [size, _name] => {
                 let size = size.parse::<u32>().unwrap();
                 for idx in 0..candidates.len() {
                     let path = PathBuf::from_iter(&candidates[..=idx]);
@@ -53,14 +49,11 @@ fn p2(input: &str) -> Option<u32> {
 }
 
 fn main() -> Result<()> {
-    color_eyre::install()?;
-    Ok(solve!(&aoc::read_file("inputs", DAY)?, p1, p2))
+    Ok(solve!(&read_file("inputs", DAY)?, p1, p2))
 }
 
 #[cfg(test)]
 mod tests {
-    use pretty_assertions::assert_eq;
-
     use super::*;
 
     #[test]
@@ -71,16 +64,16 @@ mod tests {
         fs.insert("/a".into(), 94_853);
         fs.insert("/".into(), 48_381_165);
 
-        assert_eq!(parse(&aoc::read_file("examples", DAY).unwrap()), fs);
+        assert_eq!(parse(&read_file("examples", DAY).unwrap()), fs);
     }
 
     #[test]
     fn test_p1() {
-        assert_eq!(p1(&aoc::read_file("examples", DAY).unwrap()), Some(95_437))
+        assert_eq!(p1(&read_file("examples", DAY).unwrap()), Some(95_437))
     }
 
     #[test]
     fn test_p2() {
-        assert_eq!(p2(&aoc::read_file("examples", DAY).unwrap()), Some(24_933_642))
+        assert_eq!(p2(&read_file("examples", DAY).unwrap()), Some(24_933_642))
     }
 }

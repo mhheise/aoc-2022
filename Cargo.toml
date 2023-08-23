@@ -5,13 +5,13 @@ authors = ["Matt Heise <mhheise@pm.me>"]
 edition = "2021"
 default-run = "aoc"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+# See more keys and their definitions at
+# https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-color-eyre = "0.6"
+anyhow = "1"
 itertools = "0.10"
 tabled = "0.13"
 
 [dev-dependencies]
-pretty_assertions = "1"
 test-case = "3"

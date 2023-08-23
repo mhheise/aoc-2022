@@ -1,7 +1,7 @@
 use std::{fs, process::Command};
 
+use anyhow::Result;
 use aoc::extract_solver_time;
-use color_eyre::Result;
 use itertools::Itertools;
 use tabled::{
     settings::{
@@ -31,8 +31,6 @@ impl Problem {
 }
 
 fn main() -> Result<()> {
-    color_eyre::install()?;
-
     let days = fs::read_dir(concat!(env!("CARGO_MANIFEST_DIR"), "/src/bin/"))?
         .filter_map(|p| p.ok()?.path().file_stem()?.to_str().map(str::to_string))
         .filter(|f| f.parse::<u8>().is_ok())

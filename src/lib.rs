@@ -1,6 +1,18 @@
 use std::{env, fs};
 
-use color_eyre::Result;
+use anyhow::Result;
+
+pub mod prelude {
+    pub use std::{
+        collections::{HashMap, HashSet},
+        path::{Path, PathBuf},
+    };
+
+    pub use anyhow::{Context, Error, Result};
+    pub use itertools::Itertools;
+
+    pub use crate::{extract_solver_time, read_file, solve};
+}
 
 /// Read the input file for a given day.
 pub fn read_file(folder: &str, day: u8) -> Result<String> {

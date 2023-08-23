@@ -1,6 +1,5 @@
 #![allow(dead_code, unused_variables)]
-use aoc::solve;
-use color_eyre::Result;
+use aoc::prelude::*;
 
 const DAY: u8 = 0;
 
@@ -13,23 +12,20 @@ fn p2(input: &str) -> Option<u32> {
 }
 
 fn main() -> Result<()> {
-    color_eyre::install()?;
-    Ok(solve!(&aoc::read_file("inputs", DAY)?, p1, p2))
+    Ok(solve!(&read_file("inputs", DAY)?, p1, p2))
 }
 
 #[cfg(test)]
 mod tests {
-    use pretty_assertions::assert_eq;
-
     use super::*;
 
     #[test]
     fn test_p1() {
-        assert_eq!(p1(&aoc::read_file("examples", DAY).unwrap()), None)
+        assert_eq!(p1(&read_file("examples", DAY).unwrap()), None)
     }
 
     #[test]
     fn test_p2() {
-        assert_eq!(p2(&aoc::read_file("examples", DAY).unwrap()), None)
+        assert_eq!(p2(&read_file("examples", DAY).unwrap()), None)
     }
 }

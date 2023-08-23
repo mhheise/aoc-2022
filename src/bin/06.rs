@@ -1,7 +1,4 @@
-#![allow(dead_code, unused_variables)]
-use aoc::solve;
-use color_eyre::Result;
-use itertools::Itertools;
+use aoc::prelude::*;
 
 const DAY: u8 = 6;
 
@@ -22,13 +19,11 @@ fn p2(input: &str) -> Option<usize> {
 }
 
 fn main() -> Result<()> {
-    color_eyre::install()?;
-    Ok(solve!(&aoc::read_file("inputs", DAY)?, p1, p2))
+    Ok(solve!(&read_file("inputs", DAY)?, p1, p2))
 }
 
 #[cfg(test)]
 mod tests {
-    use pretty_assertions::assert_eq;
     use test_case::test_case;
 
     use super::*;

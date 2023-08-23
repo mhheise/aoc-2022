@@ -1,7 +1,4 @@
-#![allow(dead_code, unused_variables)]
-use aoc::solve;
-use color_eyre::Result;
-use itertools::Itertools;
+use aoc::prelude::*;
 
 const DAY: u8 = 5;
 
@@ -76,19 +73,16 @@ fn p2(input: &str) -> Option<String> {
 }
 
 fn main() -> Result<()> {
-    color_eyre::install()?;
-    Ok(solve!(&aoc::read_file("inputs", DAY)?, p1, p2))
+    Ok(solve!(&read_file("inputs", DAY)?, p1, p2))
 }
 
 #[cfg(test)]
 mod tests {
-    use pretty_assertions::assert_eq;
-
     use super::*;
 
     #[test]
     fn test_number_of_stacks() {
-        let input = aoc::read_file("examples", DAY).unwrap();
+        let input = read_file("examples", DAY).unwrap();
         let (crates, _) = input.split_once("\n\n").unwrap();
 
         assert_eq!(number_of_stacks(crates), 3)
@@ -96,7 +90,7 @@ mod tests {
 
     #[test]
     fn test_top_crates_by_stack() {
-        let input = aoc::read_file("examples", DAY).unwrap();
+        let input = read_file("examples", DAY).unwrap();
         let (crates, _) = input.split_once("\n\n").unwrap();
         let stacks = parse_crates(crates);
 
@@ -105,7 +99,7 @@ mod tests {
 
     #[test]
     fn test_parse_crates() {
-        let input = aoc::read_file("examples", DAY).unwrap();
+        let input = read_file("examples", DAY).unwrap();
         let (crates, _) = input.split_once("\n\n").unwrap();
 
         assert_eq!(parse_crates(crates), vec![vec!['Z', 'N'], vec!['M', 'C', 'D'], vec!['P']])
@@ -113,7 +107,7 @@ mod tests {
 
     #[test]
     fn test_parse_steps() {
-        let input = aoc::read_file("examples", DAY).unwrap();
+        let input = read_file("examples", DAY).unwrap();
         let (_, steps) = input.split_once("\n\n").unwrap();
 
         assert_eq!(parse_steps(steps), vec![(1, 2, 1), (3, 1, 3), (2, 2, 1), (1, 1, 2)])
@@ -121,11 +115,11 @@ mod tests {
 
     #[test]
     fn test_p1() {
-        assert_eq!(p1(&aoc::read_file("examples", DAY).unwrap()), Some("CMZ".to_string()))
+        assert_eq!(p1(&read_file("examples", DAY).unwrap()), Some("CMZ".to_string()))
     }
 
     #[test]
     fn test_p2() {
-        assert_eq!(p2(&aoc::read_file("examples", DAY).unwrap()), Some("MCD".to_string()))
+        assert_eq!(p2(&read_file("examples", DAY).unwrap()), Some("MCD".to_string()))
     }
 }
