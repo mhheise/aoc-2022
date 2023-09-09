@@ -10,6 +10,7 @@ pub mod prelude {
 
     pub use anyhow::{Context, Error, Result};
     pub use itertools::Itertools;
+    pub use pathfinding::prelude::{directions::DIRECTIONS_4, Matrix};
 
     pub use crate::{extract_solver_time, read_file, solve};
 }

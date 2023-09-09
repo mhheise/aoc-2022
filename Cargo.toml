@@ -11,6 +11,7 @@ default-run = "aoc"
 [dependencies]
 anyhow = "1"
 itertools = "0.10"
+pathfinding = "4"
 tabled = "0.13"
 
 [dev-dependencies]
