@@ -1,3 +1,4 @@
+//! Day 2: Rock Paper Scissors
 use aoc::prelude::*;
 
 const DAY: u8 = 2;
@@ -7,7 +8,7 @@ fn parse(input: &str) -> Vec<(i16, i16)> {
         .lines()
         .map(str::as_bytes)
         // convert from u8 to i16 to support wrap-around arithmetic
-        .map(|c| ((c[0] - b'A') as i16, (c[2] - b'X') as i16))
+        .map(|c| (i16::from(c[0] - b'A'), i16::from(c[2] - b'X')))
         .collect()
 }
 

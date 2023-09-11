@@ -1,3 +1,4 @@
+//! Day 8: Treetop Tree House
 use aoc::prelude::*;
 
 const DAY: u8 = 8;
@@ -30,14 +31,13 @@ fn calc_scenic_score(coord: (usize, usize), matrix: &Matrix<&u8>) -> usize {
         .iter()
         .map(|dir| {
             // Number of trees between the current tree and the edge of the forest
-            let len = matrix.in_direction((row, col), *dir).collect::<Vec<_>>().len();
+            let len = matrix.in_direction((row, col), *dir).count();
             // Stop at the first tree that is the same height or taller. If no trees are
             // taller, stop at the edge of the forest and use that distance instead.
             matrix
                 .in_direction((row, col), *dir)
                 .position(|h| matrix[h] >= height)
-                .map(|p| p + 1)
-                .unwrap_or_else(|| len)
+                .map_or_else(|| len, |p| p + 1)
         })
         .product()
 }
@@ -96,11 +96,11 @@ mod tests {
 
     #[test]
     fn test_p1() {
-        assert_eq!(p1(&read_file("examples", DAY).unwrap()), Some(21))
+        assert_eq!(p1(&read_file("examples", DAY).unwrap()), Some(21));
     }
 
     #[test]
     fn test_p2() {
-        assert_eq!(p2(&read_file("examples", DAY).unwrap()), Some(8))
+        assert_eq!(p2(&read_file("examples", DAY).unwrap()), Some(8));
     }
 }

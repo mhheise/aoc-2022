@@ -1,0 +1,14 @@
+allow = [
+    # Multiple versions of `syn` present
+    "clippy::multiple_crate_versions",
+    # The `solve` macro expects an `Option`
+    "clippy::unnecessary_wraps",
+]
+warn = [
+    "clippy::all",
+    "clippy::cargo",
+    "clippy::nursery",
+    "clippy::pedantic"
+]
+deny = ["missing_docs"]
+forbid = ["unsafe_code"]

@@ -1,3 +1,4 @@
+//! Advent of Code 2022
 use std::{fs, process::Command};
 
 use anyhow::Result;
@@ -56,7 +57,7 @@ fn main() -> Result<()> {
         .with(Modify::new(Rows::first()).with(Alignment::center()))
         .with(Modify::new(Columns::first()).with(Alignment::center()));
 
-    println!("{}", table);
+    println!("{table}");
     println!("\nTotal time: {:.2}ms", total_time / 1000);
 
     Ok(())

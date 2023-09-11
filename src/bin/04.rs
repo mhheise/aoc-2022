@@ -1,3 +1,4 @@
+//! Day 4: Camp Cleanup
 use aoc::prelude::*;
 
 const DAY: u8 = 4;
@@ -44,16 +45,16 @@ mod tests {
                 (6, 6, 4, 6),
                 (2, 6, 4, 8)
             ]
-        )
+        );
     }
 
     #[test]
     fn test_p1() {
-        assert_eq!(p1(&read_file("examples", DAY).unwrap()), Some(2))
+        assert_eq!(p1(&read_file("examples", DAY).unwrap()), Some(2));
     }
 
     #[test]
     fn test_p2() {
-        assert_eq!(p2(&read_file("examples", DAY).unwrap()), Some(4))
+        assert_eq!(p2(&read_file("examples", DAY).unwrap()), Some(4));
     }
 }

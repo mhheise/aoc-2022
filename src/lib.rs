@@ -1,7 +1,10 @@
+#![doc = include_str!("../README.md")]
+
 use std::{env, fs};
 
 use anyhow::Result;
 
+/// Common imports for each day.
 pub mod prelude {
     pub use std::{
         collections::{HashMap, HashSet},
@@ -15,16 +18,32 @@ pub mod prelude {
     pub use crate::{extract_solver_time, read_file, solve};
 }
 
-/// Read the input file for a given day.
+/// Read a text file given a folder name and day number.
+/// This function assumes that the file is located at `src/{folder}/{day:02}.txt`;
+/// for example, the input file for day 1 would be located at `src/inputs/01.txt`.
+///
+/// # Errors
+///
+/// [`std::io::Error`] if any of the following occur:
+///   - The current working directory is invalid
+///   - The file cannot be read
 pub fn read_file(folder: &str, day: u8) -> Result<String> {
     let cwd = env::current_dir()?;
-    let filepath = cwd.join(format!("src/{folder}/{:02}.txt", day));
+    let filepath = cwd.join(format!("src/{folder}/{day:02}.txt"));
     let file = fs::read_to_string(filepath)?;
 
     Ok(file)
 }
 
 /// Extract the solver time from the output of a given day.
+///
+/// # Panics
+///
+/// This function will panic if the output is empty.
+///
+/// # Errors
+///
+/// This function will return an error if the output cannot be parsed.
 pub fn extract_solver_time(output: &str) -> Result<u32> {
     let binding = output.trim().split(' ').collect::<Vec<&str>>();
     let out = binding.last().unwrap();

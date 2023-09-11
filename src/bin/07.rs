@@ -1,3 +1,4 @@
+//! Day 7: No Space Left On Device
 use aoc::prelude::*;
 
 const DAY: u8 = 7;
@@ -69,11 +70,11 @@ mod tests {
 
     #[test]
     fn test_p1() {
-        assert_eq!(p1(&read_file("examples", DAY).unwrap()), Some(95_437))
+        assert_eq!(p1(&read_file("examples", DAY).unwrap()), Some(95_437));
     }
 
     #[test]
     fn test_p2() {
-        assert_eq!(p2(&read_file("examples", DAY).unwrap()), Some(24_933_642))
+        assert_eq!(p2(&read_file("examples", DAY).unwrap()), Some(24_933_642));
     }
 }

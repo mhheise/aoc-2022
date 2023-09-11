@@ -1,3 +1,4 @@
+//! Day 5: Supply Stacks
 use aoc::prelude::*;
 
 const DAY: u8 = 5;
@@ -10,7 +11,7 @@ fn number_of_stacks(stacks: &str) -> usize {
     (stacks.lines().last().unwrap().len() + 1) / 4
 }
 
-fn top_crates_by_stack(stacks: Vec<Vec<char>>) -> String {
+fn top_crates_by_stack(stacks: &[Vec<char>]) -> String {
     stacks.iter().map(|stack| stack.last().unwrap()).join("")
 }
 
@@ -51,11 +52,11 @@ fn p1(input: &str) -> Option<String> {
     for (n, from, to) in steps {
         for _ in 0..n {
             let krate = crates[from - 1].pop().unwrap();
-            crates[to - 1].push(krate)
+            crates[to - 1].push(krate);
         }
     }
 
-    Some(top_crates_by_stack(crates))
+    Some(top_crates_by_stack(&crates))
 }
 
 fn p2(input: &str) -> Option<String> {
@@ -69,7 +70,7 @@ fn p2(input: &str) -> Option<String> {
         crates[to - 1].extend(stack);
     }
 
-    Some(top_crates_by_stack(crates))
+    Some(top_crates_by_stack(&crates))
 }
 
 fn main() -> Result<()> {
@@ -85,7 +86,7 @@ mod tests {
         let input = read_file("examples", DAY).unwrap();
         let (crates, _) = input.split_once("\n\n").unwrap();
 
-        assert_eq!(number_of_stacks(crates), 3)
+        assert_eq!(number_of_stacks(crates), 3);
     }
 
     #[test]
@@ -94,7 +95,7 @@ mod tests {
         let (crates, _) = input.split_once("\n\n").unwrap();
         let stacks = parse_crates(crates);
 
-        assert_eq!(top_crates_by_stack(stacks), "NDP")
+        assert_eq!(top_crates_by_stack(&stacks), "NDP");
     }
 
     #[test]
@@ -102,7 +103,7 @@ mod tests {
         let input = read_file("examples", DAY).unwrap();
         let (crates, _) = input.split_once("\n\n").unwrap();
 
-        assert_eq!(parse_crates(crates), vec![vec!['Z', 'N'], vec!['M', 'C', 'D'], vec!['P']])
+        assert_eq!(parse_crates(crates), vec![vec!['Z', 'N'], vec!['M', 'C', 'D'], vec!['P']]);
     }
 
     #[test]
@@ -110,16 +111,16 @@ mod tests {
         let input = read_file("examples", DAY).unwrap();
         let (_, steps) = input.split_once("\n\n").unwrap();
 
-        assert_eq!(parse_steps(steps), vec![(1, 2, 1), (3, 1, 3), (2, 2, 1), (1, 1, 2)])
+        assert_eq!(parse_steps(steps), vec![(1, 2, 1), (3, 1, 3), (2, 2, 1), (1, 1, 2)]);
     }
 
     #[test]
     fn test_p1() {
-        assert_eq!(p1(&read_file("examples", DAY).unwrap()), Some("CMZ".to_string()))
+        assert_eq!(p1(&read_file("examples", DAY).unwrap()), Some("CMZ".to_string()));
     }
 
     #[test]
     fn test_p2() {
-        assert_eq!(p2(&read_file("examples", DAY).unwrap()), Some("MCD".to_string()))
+        assert_eq!(p2(&read_file("examples", DAY).unwrap()), Some("MCD".to_string()));
     }
 }

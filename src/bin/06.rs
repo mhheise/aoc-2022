@@ -1,3 +1,4 @@
+//! Day 6: Tuning Trouble
 use aoc::prelude::*;
 
 const DAY: u8 = 6;
@@ -34,7 +35,7 @@ mod tests {
     #[test_case("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg", 10)]
     #[test_case("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw", 11)]
     fn test_p1(input: &str, index: usize) {
-        assert_eq!(p1(input), Some(index))
+        assert_eq!(p1(input), Some(index));
     }
 
     #[test_case("mjqjpqmgbljsphdztnvjfqwrcgsmlb", 19)]
@@ -43,6 +44,6 @@ mod tests {
     #[test_case("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg", 29)]
     #[test_case("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw", 26)]
     fn test_p2(input: &str, index: usize) {
-        assert_eq!(p2(input), Some(index))
+        assert_eq!(p2(input), Some(index));
     }
 }

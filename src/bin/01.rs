@@ -1,3 +1,4 @@
+//! Day 1: Calorie Counting
 use aoc::prelude::*;
 
 const DAY: u8 = 1;
@@ -29,11 +30,11 @@ mod tests {
 
     #[test]
     fn test_p1() {
-        assert_eq!(p1(&read_file("examples", DAY).unwrap()), Some(24_000))
+        assert_eq!(p1(&read_file("examples", DAY).unwrap()), Some(24_000));
     }
 
     #[test]
     fn test_p2() {
-        assert_eq!(p2(&read_file("examples", DAY).unwrap()), Some(45_000))
+        assert_eq!(p2(&read_file("examples", DAY).unwrap()), Some(45_000));
     }
 }
