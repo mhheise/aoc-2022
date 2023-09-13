@@ -14,11 +14,13 @@ pub mod prelude {
     pub use anyhow::{Context, Error, Result};
     pub use itertools::Itertools;
     pub use pathfinding::prelude::{directions::DIRECTIONS_4, Matrix};
+    pub use rustc_hash::{FxHashMap, FxHashSet};
 
-    pub use crate::{extract_solver_time, read_file, solve};
+    pub use crate::{read_file, solve, solver_time};
 }
 
 /// Read a text file given a folder name and day number.
+///
 /// This function assumes that the file is located at `src/{folder}/{day:02}.txt`;
 /// for example, the input file for day 1 would be located at `src/inputs/01.txt`.
 ///
@@ -44,7 +46,7 @@ pub fn read_file(folder: &str, day: u8) -> Result<String> {
 /// # Errors
 ///
 /// This function will return an error if the output cannot be parsed.
-pub fn extract_solver_time(output: &str) -> Result<u32> {
+pub fn solver_time(output: &str) -> Result<u32> {
     let binding = output.trim().split(' ').collect::<Vec<&str>>();
     let out = binding.last().unwrap();
 

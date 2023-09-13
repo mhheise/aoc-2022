@@ -3,8 +3,8 @@ use aoc::prelude::*;
 
 const DAY: u8 = 7;
 
-fn parse(input: &str) -> HashMap<PathBuf, u32> {
-    let mut fs: HashMap<PathBuf, u32> = HashMap::new();
+fn parse(input: &str) -> FxHashMap<PathBuf, u32> {
+    let mut fs: FxHashMap<PathBuf, u32> = FxHashMap::default();
     let mut candidates: Vec<PathBuf> = Vec::new();
 
     for line in input.lines() {
@@ -59,7 +59,7 @@ mod tests {
 
     #[test]
     fn test_parse() {
-        let mut fs: HashMap<PathBuf, u32> = HashMap::new();
+        let mut fs: FxHashMap<PathBuf, u32> = FxHashMap::default();
         fs.insert("/d".into(), 24_933_642);
         fs.insert("/a/e".into(), 584);
         fs.insert("/a".into(), 94_853);

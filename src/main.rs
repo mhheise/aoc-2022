@@ -2,7 +2,7 @@
 use std::{fs, process::Command};
 
 use anyhow::Result;
-use aoc::extract_solver_time;
+use aoc::solver_time;
 use itertools::Itertools;
 use tabled::{
     settings::{
@@ -48,7 +48,7 @@ fn main() -> Result<()> {
         let (p1, p2, time) = output.split_whitespace().collect_tuple().unwrap();
 
         solutions.push(Problem::new(day, p1, p2, time));
-        total_time += extract_solver_time(&output)?;
+        total_time += solver_time(&output)?;
     }
 
     let mut table = Table::new(solutions);

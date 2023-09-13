@@ -18,6 +18,7 @@ publish = false
 anyhow = "1"
 itertools = "0.10"
 pathfinding = "4"
+rustc-hash = "1"
 tabled = "0.13"
 
 [dev-dependencies]

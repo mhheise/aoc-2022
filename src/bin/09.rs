@@ -16,7 +16,7 @@ fn parse(input: &str) -> Vec<u8> {
 
 fn run<const S: usize>(steps: Vec<u8>) -> Option<usize> {
     let mut rope = vec![(0, 0); S];
-    let mut visited = HashSet::new();
+    let mut visited = FxHashSet::default();
 
     for step in steps {
         match step {

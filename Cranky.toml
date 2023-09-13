@@ -1,7 +1,7 @@
 allow = [
     # Multiple versions of `syn` present
     "clippy::multiple_crate_versions",
-    # The `solve` macro expects an `Option`
+    # The `solve!` macro expects `Option`s
     "clippy::unnecessary_wraps",
 ]
 warn = [

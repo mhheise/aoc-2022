@@ -15,6 +15,7 @@ dependencies = [
  "anyhow",
  "itertools",
  "pathfinding",
+ "rustc-hash",
  "tabled",
  "test-case",
 ]

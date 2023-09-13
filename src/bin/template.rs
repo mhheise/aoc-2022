@@ -1,4 +1,4 @@
-#![allow(dead_code, unused_variables, clippy::missing_const_for_fn)]
+#![allow(dead_code, unused_variables)]
 
 //! Day 0: Template
 use aoc::prelude::*;
@@ -9,11 +9,11 @@ fn parse(input: &str) -> Vec<usize> {
     input.lines().filter_map(|line| line.parse::<usize>().ok()).collect()
 }
 
-fn p1(input: &str) -> Option<usize> {
+const fn p1(input: &str) -> Option<usize> {
     None
 }
 
-fn p2(input: &str) -> Option<usize> {
+const fn p2(input: &str) -> Option<usize> {
     None
 }
 
