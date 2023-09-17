@@ -3,20 +3,16 @@ use aoc::prelude::*;
 
 const DAY: u8 = 6;
 
-fn run(input: &str, size: usize) -> Option<usize> {
-    input
-        .as_bytes()
-        .windows(size)
-        .position(|window| window.iter().all_unique())
-        .map(|pos| pos + size)
+fn run<const S: usize>(input: &str) -> Option<usize> {
+    input.as_bytes().windows(S).position(|window| window.iter().all_unique()).map(|pos| pos + S)
 }
 
 fn p1(input: &str) -> Option<usize> {
-    run(input, 4)
+    run::<4>(input)
 }
 
 fn p2(input: &str) -> Option<usize> {
-    run(input, 14)
+    run::<14>(input)
 }
 
 fn main() -> Result<()> {
