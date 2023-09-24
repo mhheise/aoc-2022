@@ -16,6 +16,7 @@ publish = false
 
 [dependencies]
 anyhow = "1"
+indoc = "2"
 itertools = "0.10"
 pathfinding = "4"
 rustc-hash = "1"

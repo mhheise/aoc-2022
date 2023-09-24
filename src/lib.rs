@@ -4,6 +4,9 @@ use std::{env, fs};
 
 use anyhow::Result;
 
+/// Module for common utilities.
+pub mod utils;
+
 /// Common imports for each day.
 pub mod prelude {
     pub use std::{
@@ -13,10 +16,10 @@ pub mod prelude {
 
     pub use anyhow::{Context, Error, Result};
     pub use itertools::Itertools;
-    pub use pathfinding::prelude::{directions::DIRECTIONS_4, Matrix};
+    pub use pathfinding::prelude::{directions::DIRECTIONS_4, Grid, Matrix};
     pub use rustc_hash::{FxHashMap, FxHashSet};
 
-    pub use crate::{read_file, solve, solver_time};
+    pub use crate::{read_file, solve, solver_time, utils::*};
 }
 
 /// Read a text file given a folder name and day number.
@@ -94,11 +97,14 @@ macro_rules! solve {
             }
         }
 
-        fn timed_solution<T: Debug + Display>(
-            input: &str,
-            fn1: impl FnOnce(&str) -> Option<T>,
-            fn2: impl FnOnce(&str) -> Option<T>,
-        ) {
+        fn timed_solution<'a, T, U>(
+            input: &'a str,
+            fn1: impl FnOnce(&'a str) -> Option<T>,
+            fn2: impl FnOnce(&'a str) -> Option<U>,
+        ) where
+            T: Debug + Display,
+            U: Debug + Display,
+        {
             let timer = Instant::now();
             let r1 = fn1(input);
             let r2 = fn2(input);
