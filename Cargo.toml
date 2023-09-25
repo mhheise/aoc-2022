@@ -19,8 +19,11 @@ anyhow = "1"
 indoc = "2"
 itertools = "0.10"
 pathfinding = "4"
+parse-display = "0.8"
 rustc-hash = "1"
 tabled = "0.13"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 
 [dev-dependencies]
 test-case = "3"

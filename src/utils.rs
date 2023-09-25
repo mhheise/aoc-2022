@@ -1,5 +1,25 @@
 use itertools::Itertools;
 use rustc_hash::FxHashMap;
+use tracing_subscriber::{fmt, EnvFilter};
+
+/// Initializes tracing with the default environment filter and compact output format.
+///
+/// This is useful for conditionally rendering debug log messages based on the `RUST_LOG`
+/// environment variable.
+pub fn init_tracing() {
+    tracing_subscriber::fmt()
+        .with_env_filter(EnvFilter::from_default_env())
+        .event_format(
+            fmt::format()
+                .without_time()
+                .with_level(false)
+                .with_target(false)
+                .with_thread_ids(false)
+                .with_thread_names(false)
+                .compact(),
+        )
+        .init();
+}
 
 /// Returns a series of uppercase letters corresponding to "lit" characters on a screen.
 ///

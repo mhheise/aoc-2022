@@ -10,14 +10,16 @@ pub mod utils;
 /// Common imports for each day.
 pub mod prelude {
     pub use std::{
-        collections::{HashMap, HashSet},
+        collections::{HashMap, HashSet, VecDeque},
         path::{Path, PathBuf},
     };
 
     pub use anyhow::{Context, Error, Result};
     pub use itertools::Itertools;
+    pub use parse_display::{Display, FromStr};
     pub use pathfinding::prelude::{directions::DIRECTIONS_4, Grid, Matrix};
     pub use rustc_hash::{FxHashMap, FxHashSet};
+    pub use tracing::{debug, error, info, trace, warn};
 
     pub use crate::{read_file, solve, solver_time, utils::*};
 }
