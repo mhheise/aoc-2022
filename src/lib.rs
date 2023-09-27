@@ -18,6 +18,7 @@ pub mod prelude {
     pub use itertools::Itertools;
     pub use parse_display::{Display, FromStr};
     pub use pathfinding::prelude::{directions::DIRECTIONS_4, Grid, Matrix};
+    pub use pathfinding::prelude::{bfs, directions::DIRECTIONS_4, Grid, Matrix};
     pub use rustc_hash::{FxHashMap, FxHashSet};
     pub use tracing::{debug, error, info, trace, warn};
 
