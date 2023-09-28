@@ -3,7 +3,7 @@ use aoc::prelude::*;
 
 const DAY: u8 = 11;
 
-#[derive(Clone, Display, FromStr)]
+#[derive(Debug, Display, FromStr)]
 enum Operation {
     #[display(r"old * old")]
     Square,
@@ -13,7 +13,7 @@ enum Operation {
     Multiply(u64),
 }
 
-#[derive(Clone, Display, FromStr)]
+#[derive(Debug, Display, FromStr)]
 #[display(r"Monkey {id}:|  Starting items: {worry}|  Operation: new = {operation}|  Test: divisible by {divisor}|    If true: throw to monkey {true_monkey}|    If false: throw to monkey {false_monkey}")]
 struct Monkey {
     id: u8,
@@ -76,28 +76,27 @@ fn parse(input: &str) -> Vec<Monkey> {
 fn simulate(monkeys: &mut Vec<Monkey>, rounds: u32, manage: impl Fn(u64) -> u64) {
     for round in 1..=rounds {
         debug!("Round {}\n", round);
-        for idx in 0..monkeys.len() {
-            debug!("Monkey {}:", idx);
-            while let Some(item) = monkeys[idx].items.pop_front() {
-                let monkey = &monkeys[idx];
+        for i in 0..monkeys.len() {
+            debug!("Monkey {}:", i);
+            while let Some(item) = monkeys[i].items.pop_front() {
+                let monkey = &monkeys[i];
                 let new = monkey.inspect(item, &manage);
                 let target = monkey.test(new);
 
-                monkeys[idx].inspected += 1;
+                monkeys[i].inspected += 1;
                 monkeys[target].items.push_back(new);
             }
         }
 
         debug!("");
         debug!("After round {round}, the monkeys are holding items with these worry levels:");
-        for (i, m) in monkeys.iter().enumerate() {
-            debug!("  Monkey {}: {}", i, m.items.iter().join(", "));
+        for (i, monkey) in monkeys.iter().enumerate() {
+            debug!("  Monkey {}: {}", i, monkey.items.iter().join(", "));
+            if i == round as usize {
+                debug!("Monkey {} inspected items {} times.", i, monkey.inspected);
+            }
         }
         debug!("");
-    }
-
-    for (i, m) in monkeys.iter().enumerate() {
-        debug!("Monkey {} inspected items {} times.", i, m.inspected);
     }
 }
 
