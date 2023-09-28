@@ -3,11 +3,11 @@ use aoc::prelude::*;
 
 const DAY: u8 = 8;
 
-fn parse(input: &str) -> Matrix<&u8> {
-    Matrix::from_rows(input.lines().map(str::as_bytes)).unwrap()
+fn parse(input: &str) -> Matrix<u8> {
+    Matrix::from_rows(input.lines().map(str::bytes)).unwrap()
 }
 
-fn is_tree_visible(coord: (usize, usize), matrix: &Matrix<&u8>) -> bool {
+fn is_tree_visible(coord: (usize, usize), matrix: &Matrix<u8>) -> bool {
     let (row, col) = coord;
     let height = matrix[(row, col)];
 
@@ -23,7 +23,7 @@ fn is_tree_visible(coord: (usize, usize), matrix: &Matrix<&u8>) -> bool {
         })
 }
 
-fn calc_scenic_score(coord: (usize, usize), matrix: &Matrix<&u8>) -> usize {
+fn calc_scenic_score(coord: (usize, usize), matrix: &Matrix<u8>) -> usize {
     let (row, col) = coord;
     let height = matrix[(row, col)];
 
