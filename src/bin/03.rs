@@ -32,7 +32,7 @@ fn p1(input: &str) -> Option<u32> {
 fn p2(input: &str) -> Option<u32> {
     Some(
         parse(input)
-            .chunks(3)
+            .chunks_exact(3)
             .map(|sack| {
                 sack[0]
                     .iter()
