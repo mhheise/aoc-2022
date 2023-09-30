@@ -1,4 +1,6 @@
 //! Day 13: Distress Signal
+#![feature(test)]
+
 use aoc::prelude::*;
 
 const DAY: u8 = 13;
@@ -77,33 +79,45 @@ fn main() -> Result<()> {
 
 #[cfg(test)]
 mod tests {
-    use test_case::test_case;
+    use aoc::testing::*;
 
     use super::*;
 
     // `Ordering::Less` means the packets are in the right order;
     // `Ordering::Greater` means the packets are _not_ in the right order.
-    #[test_case(("[1,1,3,1,1]", "[1,1,5,1,1]"), Ordering::Less)]
-    #[test_case(("[[1],[2,3,4]]", "[[1],4]"), Ordering::Less)]
-    #[test_case(("[9]", "[[8,7,6]]"), Ordering::Greater)]
-    #[test_case(("[[4,4],4,4]", "[[4,4],4,4,4]"), Ordering::Less)]
-    #[test_case(("[7,7,7,7]", "[7,7,7]"), Ordering::Greater)]
-    #[test_case(("[]", "[3]"), Ordering::Less)]
-    #[test_case(("[[[]]]", "[[]]"), Ordering::Greater)]
-    #[test_case(("[1,[2,[3,[4,[5,6,7]]]],8,9]", "[1,[2,[3,[4,[5,6,0]]]],8,9]"), Ordering::Greater)]
+    #[case(("[1,1,3,1,1]", "[1,1,5,1,1]"), Ordering::Less)]
+    #[case(("[[1],[2,3,4]]", "[[1],4]"), Ordering::Less)]
+    #[case(("[9]", "[[8,7,6]]"), Ordering::Greater)]
+    #[case(("[[4,4],4,4]", "[[4,4],4,4,4]"), Ordering::Less)]
+    #[case(("[7,7,7,7]", "[7,7,7]"), Ordering::Greater)]
+    #[case(("[]", "[3]"), Ordering::Less)]
+    #[case(("[[[]]]", "[[]]"), Ordering::Greater)]
+    #[case(("[1,[2,[3,[4,[5,6,7]]]],8,9]", "[1,[2,[3,[4,[5,6,0]]]],8,9]"), Ordering::Greater)]
     fn test_cmp((l, r): (&str, &str), ordered: Ordering) {
         let left = from_str::<Packet>(l).unwrap();
         let right = from_str::<Packet>(r).unwrap();
-        assert_eq!(left.partial_cmp(&right).unwrap(), ordered);
+        assert_eqp!(left.partial_cmp(&right).unwrap(), ordered);
     }
 
     #[test]
     fn test_p1() {
-        assert_eq!(p1(&read_file("examples", DAY).unwrap()), Some(13));
+        assert_eqp!(p1(&read_file("examples", DAY).unwrap()), Some(13));
     }
 
     #[test]
     fn test_p2() {
-        assert_eq!(p2(&read_file("examples", DAY).unwrap()), Some(140));
+        assert_eqp!(p2(&read_file("examples", DAY).unwrap()), Some(140));
+    }
+
+    #[bench]
+    fn bench_p1(b: &mut Bencher) {
+        let input = read_file("inputs", DAY).unwrap();
+        b.iter(|| p1(&input));
+    }
+
+    #[bench]
+    fn bench_p2(b: &mut Bencher) {
+        let input = read_file("inputs", DAY).unwrap();
+        b.iter(|| p2(&input));
     }
 }

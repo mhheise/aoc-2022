@@ -1,4 +1,6 @@
 //! Day 3: Rucksack Reorganization
+#![feature(test)]
+
 use aoc::prelude::*;
 
 const DAY: u8 = 3;
@@ -49,23 +51,37 @@ fn main() -> Result<()> {
 
 #[cfg(test)]
 mod tests {
+    use aoc::testing::*;
+
     use super::*;
 
     #[test]
     fn test_to_priority() {
-        assert_eq!(to_priority(b'a'), 1);
-        assert_eq!(to_priority(b'z'), 26);
-        assert_eq!(to_priority(b'A'), 27);
-        assert_eq!(to_priority(b'Z'), 52);
+        assert_eqp!(to_priority(b'a'), 1);
+        assert_eqp!(to_priority(b'z'), 26);
+        assert_eqp!(to_priority(b'A'), 27);
+        assert_eqp!(to_priority(b'Z'), 52);
     }
 
     #[test]
     fn test_p1() {
-        assert_eq!(p1(&read_file("examples", DAY).unwrap()), Some(157));
+        assert_eqp!(p1(&read_file("examples", DAY).unwrap()), Some(157));
     }
 
     #[test]
     fn test_p2() {
-        assert_eq!(p2(&read_file("examples", DAY).unwrap()), Some(70));
+        assert_eqp!(p2(&read_file("examples", DAY).unwrap()), Some(70));
+    }
+
+    #[bench]
+    fn bench_p1(b: &mut Bencher) {
+        let input = read_file("inputs", DAY).unwrap();
+        b.iter(|| p1(&input));
+    }
+
+    #[bench]
+    fn bench_p2(b: &mut Bencher) {
+        let input = read_file("inputs", DAY).unwrap();
+        b.iter(|| p2(&input));
     }
 }

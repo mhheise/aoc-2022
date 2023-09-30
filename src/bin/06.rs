@@ -1,4 +1,6 @@
 //! Day 6: Tuning Trouble
+#![feature(test)]
+
 use aoc::prelude::*;
 
 const DAY: u8 = 6;
@@ -21,25 +23,37 @@ fn main() -> Result<()> {
 
 #[cfg(test)]
 mod tests {
-    use test_case::test_case;
+    use aoc::testing::*;
 
     use super::*;
 
-    #[test_case("mjqjpqmgbljsphdztnvjfqwrcgsmlb", 7)]
-    #[test_case("bvwbjplbgvbhsrlpgdmjqwftvncz", 5)]
-    #[test_case("nppdvjthqldpwncqszvftbrmjlhg", 6)]
-    #[test_case("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg", 10)]
-    #[test_case("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw", 11)]
+    #[case("mjqjpqmgbljsphdztnvjfqwrcgsmlb", 7)]
+    #[case("bvwbjplbgvbhsrlpgdmjqwftvncz", 5)]
+    #[case("nppdvjthqldpwncqszvftbrmjlhg", 6)]
+    #[case("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg", 10)]
+    #[case("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw", 11)]
     fn test_p1(input: &str, index: usize) {
-        assert_eq!(p1(input), Some(index));
+        assert_eqp!(p1(input), Some(index));
     }
 
-    #[test_case("mjqjpqmgbljsphdztnvjfqwrcgsmlb", 19)]
-    #[test_case("bvwbjplbgvbhsrlpgdmjqwftvncz", 23)]
-    #[test_case("nppdvjthqldpwncqszvftbrmjlhg", 23)]
-    #[test_case("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg", 29)]
-    #[test_case("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw", 26)]
+    #[case("mjqjpqmgbljsphdztnvjfqwrcgsmlb", 19)]
+    #[case("bvwbjplbgvbhsrlpgdmjqwftvncz", 23)]
+    #[case("nppdvjthqldpwncqszvftbrmjlhg", 23)]
+    #[case("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg", 29)]
+    #[case("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw", 26)]
     fn test_p2(input: &str, index: usize) {
-        assert_eq!(p2(input), Some(index));
+        assert_eqp!(p2(input), Some(index));
+    }
+
+    #[bench]
+    fn bench_p1(b: &mut Bencher) {
+        let input = read_file("inputs", DAY).unwrap();
+        b.iter(|| p1(&input));
+    }
+
+    #[bench]
+    fn bench_p2(b: &mut Bencher) {
+        let input = read_file("inputs", DAY).unwrap();
+        b.iter(|| p2(&input));
     }
 }

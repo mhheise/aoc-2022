@@ -1,4 +1,6 @@
 //! Day 9: Rope Bridge
+#![feature(test)]
+
 use aoc::prelude::*;
 
 const DAY: u8 = 9;
@@ -61,16 +63,30 @@ fn main() -> Result<()> {
 
 #[cfg(test)]
 mod tests {
+    use aoc::testing::*;
+
     use super::*;
 
     #[test]
     fn test_p1() {
         // Uses the longer example from part 2
-        assert_eq!(p1(&read_file("examples", DAY).unwrap()), Some(88));
+        assert_eqp!(p1(&read_file("examples", DAY).unwrap()), Some(88));
     }
 
     #[test]
     fn test_p2() {
-        assert_eq!(p2(&read_file("examples", DAY).unwrap()), Some(36));
+        assert_eqp!(p2(&read_file("examples", DAY).unwrap()), Some(36));
+    }
+
+    #[bench]
+    fn bench_p1(b: &mut Bencher) {
+        let input = read_file("inputs", DAY).unwrap();
+        b.iter(|| p1(&input));
+    }
+
+    #[bench]
+    fn bench_p2(b: &mut Bencher) {
+        let input = read_file("inputs", DAY).unwrap();
+        b.iter(|| p2(&input));
     }
 }

@@ -1,32 +1,57 @@
 #![doc = include_str!("../README.md")]
+#![feature(test)]
 
 use std::{env, fs};
 
 use anyhow::Result;
 
+/// Module for common imports.
+///
+/// This prelude is designed for _convenience_ rather than performance. While it is possible to
+/// specify individual imports, this module is meant to be used as a wildcard import to
+/// facilitate rapid prototyping.
+///
+/// # Examples
+///
+/// ```rust
+/// use aoc::prelude::*;
+///
+/// let input = read_file("inputs", 0).unwrap();
+/// for line in input.lines() {
+///     println!("{}", input);
+/// }
+/// ```
+pub mod prelude;
+
+/// Module for test-specific imports.
+///
+/// This prelude re-exports utilities for prettier assertions, parameterized tests, and nightly
+/// features for running micro-benchmarks.
+///
+/// # Examples
+///
+/// ```rust
+/// #![feature(test)]
+///
+/// #[cfg(test)]
+/// mod tests {
+///     use aoc::testing::*;
+///
+///     #[test]
+///     fn test() {
+///         assert_eqp!(1, 1);
+///     }
+///
+///     #[bench]
+///     fn bench(b: &mut Bencher) {
+///         b.iter(|| 1 + 1);
+///     }
+/// }
+/// ```
+pub mod testing;
+
 /// Module for common utilities.
 pub mod utils;
-
-/// Common imports for each day.
-pub mod prelude {
-    pub use std::{
-        cmp::Ordering,
-        collections::{HashMap, HashSet, VecDeque},
-        fmt::{self},
-        path::{Path, PathBuf},
-    };
-
-    pub use anyhow::{Context, Error, Result};
-    pub use itertools::Itertools;
-    pub use parse_display::{Display, FromStr};
-    pub use pathfinding::prelude::{bfs, directions::DIRECTIONS_4, Grid, Matrix};
-    pub use rustc_hash::{FxHashMap, FxHashSet};
-    pub use serde::{self, Deserialize, Serialize};
-    pub use serde_json::{from_str, json, to_string};
-    pub use tracing::{debug, error, info, trace, warn};
-
-    pub use crate::{read_file, solve, solver_time, utils::*};
-}
 
 /// Read a text file given a folder name and day number.
 ///

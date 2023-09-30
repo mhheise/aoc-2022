@@ -1,4 +1,6 @@
 //! Day 5: Supply Stacks
+#![feature(test)]
+
 use aoc::prelude::*;
 
 const DAY: u8 = 5;
@@ -79,6 +81,8 @@ fn main() -> Result<()> {
 
 #[cfg(test)]
 mod tests {
+    use aoc::testing::*;
+
     use super::*;
 
     #[test]
@@ -86,7 +90,7 @@ mod tests {
         let input = read_file("examples", DAY).unwrap();
         let (crates, _) = input.split_once("\n\n").unwrap();
 
-        assert_eq!(number_of_stacks(crates), 3);
+        assert_eqp!(number_of_stacks(crates), 3);
     }
 
     #[test]
@@ -95,7 +99,7 @@ mod tests {
         let (crates, _) = input.split_once("\n\n").unwrap();
         let stacks = parse_crates(crates);
 
-        assert_eq!(top_crates_by_stack(&stacks), "NDP");
+        assert_eqp!(top_crates_by_stack(&stacks), "NDP");
     }
 
     #[test]
@@ -103,7 +107,7 @@ mod tests {
         let input = read_file("examples", DAY).unwrap();
         let (crates, _) = input.split_once("\n\n").unwrap();
 
-        assert_eq!(parse_crates(crates), vec![vec!['Z', 'N'], vec!['M', 'C', 'D'], vec!['P']]);
+        assert_eqp!(parse_crates(crates), vec![vec!['Z', 'N'], vec!['M', 'C', 'D'], vec!['P']]);
     }
 
     #[test]
@@ -111,16 +115,28 @@ mod tests {
         let input = read_file("examples", DAY).unwrap();
         let (_, steps) = input.split_once("\n\n").unwrap();
 
-        assert_eq!(parse_steps(steps), vec![(1, 2, 1), (3, 1, 3), (2, 2, 1), (1, 1, 2)]);
+        assert_eqp!(parse_steps(steps), vec![(1, 2, 1), (3, 1, 3), (2, 2, 1), (1, 1, 2)]);
     }
 
     #[test]
     fn test_p1() {
-        assert_eq!(p1(&read_file("examples", DAY).unwrap()), Some("CMZ".to_string()));
+        assert_eqp!(p1(&read_file("examples", DAY).unwrap()), Some("CMZ".to_string()));
     }
 
     #[test]
     fn test_p2() {
-        assert_eq!(p2(&read_file("examples", DAY).unwrap()), Some("MCD".to_string()));
+        assert_eqp!(p2(&read_file("examples", DAY).unwrap()), Some("MCD".to_string()));
+    }
+
+    #[bench]
+    fn bench_p1(b: &mut Bencher) {
+        let input = read_file("inputs", DAY).unwrap();
+        b.iter(|| p1(&input));
+    }
+
+    #[bench]
+    fn bench_p2(b: &mut Bencher) {
+        let input = read_file("inputs", DAY).unwrap();
+        b.iter(|| p2(&input));
     }
 }

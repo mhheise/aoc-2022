@@ -1,4 +1,6 @@
 //! Day 8: Treetop Tree House
+#![feature(test)]
+
 use aoc::prelude::*;
 
 const DAY: u8 = 8;
@@ -60,47 +62,59 @@ fn main() -> Result<()> {
 
 #[cfg(test)]
 mod tests {
-    use test_case::test_case;
+    use aoc::testing::*;
 
     use super::*;
 
-    #[test_case((1, 1), true)]
-    #[test_case((1, 2), true)]
-    #[test_case((1, 3), false)]
-    #[test_case((2, 1), true)]
-    #[test_case((2, 2), false)]
-    #[test_case((2, 3), true)]
-    #[test_case((3, 1), false)]
-    #[test_case((3, 2), true)]
-    #[test_case((3, 3), false)]
+    #[case((1, 1), true)]
+    #[case((1, 2), true)]
+    #[case((1, 3), false)]
+    #[case((2, 1), true)]
+    #[case((2, 2), false)]
+    #[case((2, 3), true)]
+    #[case((3, 1), false)]
+    #[case((3, 2), true)]
+    #[case((3, 3), false)]
     fn test_is_tree_visible(coord: (usize, usize), result: bool) {
         let input = &read_file("examples", DAY).unwrap();
         let matrix = parse(input);
-        assert_eq!(is_tree_visible(coord, &matrix), result);
+        assert_eqp!(is_tree_visible(coord, &matrix), result);
     }
 
-    #[test_case((1, 1), 1)]
-    #[test_case((1, 2), 4)]
-    #[test_case((1, 3), 1)]
-    #[test_case((2, 1), 6)]
-    #[test_case((2, 2), 1)]
-    #[test_case((2, 3), 2)]
-    #[test_case((3, 1), 1)]
-    #[test_case((3, 2), 8)]
-    #[test_case((3, 3), 3)]
+    #[case((1, 1), 1)]
+    #[case((1, 2), 4)]
+    #[case((1, 3), 1)]
+    #[case((2, 1), 6)]
+    #[case((2, 2), 1)]
+    #[case((2, 3), 2)]
+    #[case((3, 1), 1)]
+    #[case((3, 2), 8)]
+    #[case((3, 3), 3)]
     fn test_calc_scenic_score(coord: (usize, usize), result: usize) {
         let input = &read_file("examples", DAY).unwrap();
         let matrix = parse(input);
-        assert_eq!(calc_scenic_score(coord, &matrix), result);
+        assert_eqp!(calc_scenic_score(coord, &matrix), result);
     }
 
     #[test]
     fn test_p1() {
-        assert_eq!(p1(&read_file("examples", DAY).unwrap()), Some(21));
+        assert_eqp!(p1(&read_file("examples", DAY).unwrap()), Some(21));
     }
 
     #[test]
     fn test_p2() {
-        assert_eq!(p2(&read_file("examples", DAY).unwrap()), Some(8));
+        assert_eqp!(p2(&read_file("examples", DAY).unwrap()), Some(8));
+    }
+
+    #[bench]
+    fn bench_p1(b: &mut Bencher) {
+        let input = read_file("inputs", DAY).unwrap();
+        b.iter(|| p1(&input));
+    }
+
+    #[bench]
+    fn bench_p2(b: &mut Bencher) {
+        let input = read_file("inputs", DAY).unwrap();
+        b.iter(|| p2(&input));
     }
 }

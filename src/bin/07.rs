@@ -1,4 +1,6 @@
 //! Day 7: No Space Left On Device
+#![feature(test)]
+
 use aoc::prelude::*;
 
 const DAY: u8 = 7;
@@ -55,6 +57,8 @@ fn main() -> Result<()> {
 
 #[cfg(test)]
 mod tests {
+    use aoc::testing::*;
+
     use super::*;
 
     #[test]
@@ -65,16 +69,28 @@ mod tests {
         fs.insert("/a".into(), 94_853);
         fs.insert("/".into(), 48_381_165);
 
-        assert_eq!(parse(&read_file("examples", DAY).unwrap()), fs);
+        assert_eqp!(parse(&read_file("examples", DAY).unwrap()), fs);
     }
 
     #[test]
     fn test_p1() {
-        assert_eq!(p1(&read_file("examples", DAY).unwrap()), Some(95_437));
+        assert_eqp!(p1(&read_file("examples", DAY).unwrap()), Some(95_437));
     }
 
     #[test]
     fn test_p2() {
-        assert_eq!(p2(&read_file("examples", DAY).unwrap()), Some(24_933_642));
+        assert_eqp!(p2(&read_file("examples", DAY).unwrap()), Some(24_933_642));
+    }
+
+    #[bench]
+    fn bench_p1(b: &mut Bencher) {
+        let input = read_file("inputs", DAY).unwrap();
+        b.iter(|| p1(&input));
+    }
+
+    #[bench]
+    fn bench_p2(b: &mut Bencher) {
+        let input = read_file("inputs", DAY).unwrap();
+        b.iter(|| p2(&input));
     }
 }

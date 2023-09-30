@@ -20,12 +20,12 @@ indoc = "2"
 itertools = "0.10"
 parse-display = "0.8"
 pathfinding = "4"
+pretty_assertions = "1"
 rustc-hash = "1"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 tabled = "0.13"
+test-case = "3"
 tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 
-[dev-dependencies]
-test-case = "3"

@@ -1,4 +1,6 @@
 //! Day 4: Camp Cleanup
+#![feature(test)]
+
 use aoc::prelude::*;
 
 const DAY: u8 = 4;
@@ -31,11 +33,13 @@ fn main() -> Result<()> {
 
 #[cfg(test)]
 mod tests {
+    use aoc::testing::*;
+
     use super::*;
 
     #[test]
     fn test_parse() {
-        assert_eq!(
+        assert_eqp!(
             parse(&read_file("examples", DAY).unwrap()),
             vec![
                 (2, 4, 6, 8),
@@ -50,11 +54,23 @@ mod tests {
 
     #[test]
     fn test_p1() {
-        assert_eq!(p1(&read_file("examples", DAY).unwrap()), Some(2));
+        assert_eqp!(p1(&read_file("examples", DAY).unwrap()), Some(2));
     }
 
     #[test]
     fn test_p2() {
-        assert_eq!(p2(&read_file("examples", DAY).unwrap()), Some(4));
+        assert_eqp!(p2(&read_file("examples", DAY).unwrap()), Some(4));
+    }
+
+    #[bench]
+    fn bench_p1(b: &mut Bencher) {
+        let input = read_file("inputs", DAY).unwrap();
+        b.iter(|| p1(&input));
+    }
+
+    #[bench]
+    fn bench_p2(b: &mut Bencher) {
+        let input = read_file("inputs", DAY).unwrap();
+        b.iter(|| p2(&input));
     }
 }

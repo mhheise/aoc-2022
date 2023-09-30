@@ -23,6 +23,13 @@ command = [
 ]
 need_stdout = false
 
+[jobs.bench]
+command = [
+    "cargo", "bench", "--color", "always",
+    "--", "--color", "always", # see https://github.com/Canop/bacon/issues/124
+]
+need_stdout = true
+
 [jobs.test]
 command = [
     "cargo", "test", "--color", "always",
@@ -198,4 +205,5 @@ allow_warnings = true
 # Shortcuts to internal functions (scrolling, toggling, etc.)
 # should go in your personal global prefs.toml file instead.
 [keybindings]
+p = "job:bench"
 n = "job:nextest"
